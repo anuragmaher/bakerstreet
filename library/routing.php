@@ -9,21 +9,36 @@ if(!$urlArray[0])
 }
 $controller = $urlArray[0];
 array_shift($urlArray);
-
-$action = $urlArray[0];
+if(count($urlArray))
+{
+	$action = $urlArray[0];
+}
 array_shift($urlArray);
 $queryString = $urlArray;
 
+if($controller == RESTAPI)
+{
+	if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+	{
+    	$action = "create";
+	}
+	else if ($_SERVER['REQUEST_METHOD'] === 'GET') 
+	{
+		$action = "all";
+	}
+}
 $controllerName = $controller;
 $controller = ucwords($controller);
+
 $controller .= 'Controller';
 $dispatch = new $controller();
 
 if ((int)method_exists($controller, $action)) 
 {
     echo json_encode(call_user_func_array(array($dispatch,$action),$queryString));
-} 
-else 
+    return;
+}
+else
 {    
     /* Error Generation Code Here */
     header('HTTP/1.0 404 not found');

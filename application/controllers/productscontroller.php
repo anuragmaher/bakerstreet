@@ -2,23 +2,33 @@
 
 class ProductsController {
      
-    function __construct() 
+    function __construct () 
     {
         
     }
 
-    function create()
+    function create ()
     {
-        
+        $product = new product();
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $status = "active";
+        $product->createnew($name, $description, $status);
     }
 
-    function getall()
+    public function all ()
+    {
+        $product = new Product;
+        return $product->getall();
+    }
+
+    function get ()
     {
         $product = new Product;
         return $product->getall();
     }
  
-    function __destruct() 
+    function __destruct () 
     {
             //$this->_template->render();
     }

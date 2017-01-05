@@ -18,3 +18,5 @@ else
 	define('DB_PASSWORD', "kri");
 	define('DB_NAME', "heroku");
 }
+
+define("RESTAPI", "products");
