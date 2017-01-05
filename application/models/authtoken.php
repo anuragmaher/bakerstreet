@@ -16,6 +16,13 @@ class AuthToken extends BaseModel
 		return $result;
 	}
 
+	public function checkToken ($token)
+	{
+		$encryptedtoken = hash('sha256', $token);
+		$result = $this->query("select * from $this->_table where token = '$encryptedtoken'");
+		return $result;
+	}
+
 	public function createToken ($userid)
 	{
 		$dbtoken = $this->getTokenForUser($userid);

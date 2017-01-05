@@ -18,6 +18,22 @@ $queryString = $urlArray;
 
 if($controller == RESTAPI)
 {
+	if(!array_key_exists('HTTP_AUTHTOKEN', $_SERVER))
+	{
+		header('HTTP/1.0 401 Unauthorized Action');
+		return "Unauthorized Action";
+	}
+	$authtoken = $_SERVER['HTTP_AUTHTOKEN'];
+	$auth = new Authentication;
+	try
+	{
+		$auth->validateToken($authtoken);
+	}catch(UnAuthorizedActionException $e)
+	{
+		header('HTTP/1.0 401 '. $e->getMessage());
+		return "Unauthorized Action";
+	}
+
 	if ($_SERVER['REQUEST_METHOD'] === 'POST') 
 	{
     	$action = "create";

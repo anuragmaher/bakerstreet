@@ -18,6 +18,16 @@ class Authentication
     	$this->password = $_POST['password'];
     }
 
+    function validateToken ($token)
+    {
+        $authtoken = new AuthToken();
+        $result = $authtoken->checkToken($token);
+        if(!count($result))
+        {
+            throw new UnAuthorizedActionException("Invalid Token");
+        }
+    }
+
     function createNewToken ($userid)
     {
     	$authtoken = new AuthToken();
