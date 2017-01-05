@@ -1,20 +1,21 @@
-# REST API for Baker Street
+# REST API for Baker Street Store
 
 Welcome to the REST API for Baker Street! You can use our API to create view and edit products on Baker Street Online Store.
 Baker Street is inspired from Sherlock Homes :) 
 
 
-Baker Street API is built using REST principles. This API follows HTTP rules, enabling a wide range of HTTP clients can be used to interact with the API.
+Baker Street API is built using REST principles and without any framework in mind. This API follows HTTP rules, enabling a wide range of HTTP clients can be used to interact with the API.
+
+$URL = "bakerstreetwala"; // I could not get bakerstreet on heroku
+
 
 ## Getting Started
 All Baker Street API calls requires a minimum of one mandatory header.
 
 ```
-Authorization - Authentication request header.
+Authorization token - Authentication request header.
 ```
-    
-$URL = "bakerstreetwala"; // I could not get bakerstreet on heroku
-
+   
 ## Authentication
 All Baker Street API calls need to be authenticated using an authtoken.
 
@@ -29,16 +30,25 @@ The POST body should include a string in the below format.
 ?username=[username]&password=[password]
 
 Below are the mandatory case sensitive fields to be passed in the URL. Example is mentioned below
+
+
+parameter     | value
+------------- | -------------
+username      | admin
+password      | admin
+
 ```
 ?username=admin&password=admin
 ```
+
 Return value will be like 
+
 ```
 {
     "error": null,
     "content": {
         "expires": 1408109484,
-        "token": "633uq4t0qdtd1mdllnv2h1vs32"
+        "token": "633uq4t0ee23dsfd1mdllnv2h1vs32"
     }
 }
 ```
@@ -46,22 +56,27 @@ Return value will be like
 ###POINTS TO NOTE
 
 1) every time you create a new token, previous token will be invalidated. 
+
 2) token response will have a expiry time for the token, after which you will have to re generate the token.
+
 3) all requests should have token as authentication field. 
 
 
 ## HTTP Methods
 Baker Street API uses appropriate HTTP verbs for every action.
 
-```
-GET     -   Used for retrieving resources.
-POST    -   Used for creating resources and performing resource actions.
-PUT     -   Used for updating resources.
-DELETE  -   Used for deleting resources.
-```
+Method        | Description
+------------- | -------------
+GET           | Used for retrieving resources
+POST          | Used for creating resources and performing resource actions
+PUT           |  Used for updating resources.
+DELETE        |   Used for deleting resources.
+
+
 
 ## DATE
 All timestamps are returned in the ISO 8601 format - YYYY-MM-DDThh:mm:ssTZD.
+
 ```
 Example: 2016-06-11T17:38:06-0700
 ```
@@ -72,13 +87,17 @@ status codes in the 2xx range means success,
 4xx range means there was an error in the provided information, and 
 those in the 5xx range indicates server side errors. Commonly used HTTP status codes are listed below.
 
-200 - OK
-201 - CREATED
-400 - Bad request
-401 - Unauthorized (Invalid AuthToken)
-404 - URL Not Found
-405 - Method Not Allowed (Method you have called is not supported for the invoked API)
-500 - Internal Error
+
+Status Code        | Description
+------------- | -------------
+200 | OK
+201 | CREATED
+400 | Bad request
+401 | Unauthorized (Invalid AuthToken)
+404 | URL Not Found
+405 | Method Not Allowed (Method you have called is not supported for the invoked API)
+500 | Internal Error
+
 
 ## Products
 A product refers to the item present in the Baker Street Store. 
@@ -88,7 +107,7 @@ A product refers to the item present in the Baker Street Store.
 ### Example
 ```
 {
-  "product_id": "1",
+  "id": "1",
   "name": "Cake",
   "description": "Eggless Dark Choclate",
   "status": "active",
@@ -103,26 +122,31 @@ POST /products
 ```
 
 ARGUMENTS: 
-name (* * required *)
-description (* * required *)
+name (* required *)
+description (* required *)
 
 ### Get all the products
 ```
 GET /products
 ```
 
+### Delete 
+
+
+### Edit the product 
+
+
+### Search 
+
 ## Deploying
 
 Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
 ```sh
-$ git clone git@github.com:heroku/php-getting-started.git # or clone your own fork
-$ cd php-getting-started
+$ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
+$ cd bakerstreet
 $ heroku create
 $ git push heroku master
 $ heroku open
 ```
 
-or
-
-## Documentation

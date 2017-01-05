@@ -1,8 +1,7 @@
 <?php
  
-class SQLBase {
-    protected $_dbHandle;
-    protected $_result;
+class SQLBase 
+{
     protected $_conn;
  
     /** Connects to database **/
@@ -43,10 +42,20 @@ class SQLBase {
     {
         $result = $this->_conn->query($query);
         $user_arr = array();
+        if(!$result)
+        {
+            return false;
+        }
         while ($row = $result->fetch_assoc()){
             $user_arr[] = $row;
         }
         return $user_arr;
+    }
+
+    function insert($query)
+    {
+        $result = $this->_conn->query($query);
+        return $result;
     }
  
     /** Get number of rows **/

@@ -44,9 +44,12 @@ function main()
     if ((int)method_exists($controller, $action)) 
     {
         echo json_encode(call_user_func_array(array($dispatch,$action),$queryString));
-    } else {
+    } 
+    else 
+    {    
         /* Error Generation Code Here */
-        throw new Exception(" Method does not exixts ");
+        header('HTTP/1.0 404 not found');
+        return "404";
     }
 }
 
@@ -54,7 +57,11 @@ function main()
  
 function __autoload($className)
 {
-    if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')) 
+    if (file_exists(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php')) 
+    {
+        require_once(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php');
+    }
+    else if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')) 
     {
         require_once(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php');
     } 
