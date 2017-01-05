@@ -3,6 +3,7 @@
 class SQLBase 
 {
     protected $_conn;
+    protected $_table;
  
     /** Connects to database **/
  
@@ -36,7 +37,6 @@ class SQLBase
         return $this->query($query, 1);    
     }
  
-     
     /** Custom SQL Query **/
     function query($query) 
     {
@@ -57,25 +57,11 @@ class SQLBase
         $result = $this->_conn->query($query);
         return $result;
     }
- 
-    /** Get number of rows **/
-    function getNumRows ()
+
+    function update($query)
     {
-        return mysql_num_rows($this->_result);
-    }
- 
-    /** Free resources allocated by a query **/
- 
-    function freeResult ()
-    {
-        mysql_free_result($this->_result);
-    }
- 
-    /** Get error string **/
- 
-    function getError ()
-    {
-        return mysql_error($this->_dbHandle);
+        $result = $this->_conn->query($query);
+        return $result;
     }
 
 }
