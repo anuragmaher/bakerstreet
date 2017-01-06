@@ -57,6 +57,6 @@ if ((int)method_exists($controller, $action))
 else
 {    
     /* Error Generation Code Here */
-    header('HTTP/1.0 404 not found');
-    return "404";
+    header('HTTP/1.0 405 Method Not Allowed ');
+    return "405";
 }
