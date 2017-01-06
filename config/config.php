@@ -2,17 +2,15 @@
 
 if(getenv('ENV') == "HEROKU")
 {
-	define('DB_HOST', "us-cdbr-iron-east-04.cleardb.net");
-	define('DB_USER', "b375ff3cef8561");
-	define('DB_PASSWORD', "2f7baec4");
-	define('DB_NAME', "heroku_085941f3160cfba");
+	define('MYSQL_URI', getenv('DATABASE_URL'));
+	define('BASEURL', 'https://bakerstreetwala.herokuapp.com');
 }
 else
 {
-	define('DB_HOST', "localhost");
-	define('DB_USER', "root");
-	define('DB_PASSWORD', "kri");
-	define('DB_NAME', "heroku");
+	define('MYSQL_URI', 'mysql://root:kri@localhost/heroku?reconnect=true');
+	define('BASEURL', 'http://fluidtasks.com');
 }
 
+// Here we define what are the controllers for REST API. 
+// By doing this all the REST calls will be routed to specific controller actions. 
 define("RESTAPI", "products");

@@ -5,7 +5,7 @@ class BaseModel extends SQLBase
  
     function __construct () 
     {
-        $this->connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME);
+        $this->connect(MYSQL_URI);
         $this->_model = get_class($this);
         $this->_table = strtolower($this->_model)."s";
     }

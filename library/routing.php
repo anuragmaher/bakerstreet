@@ -1,7 +1,7 @@
 <?php 
 
-$url = $_GET['url'];
-$urlArray = array();
+$urlArray = explode("?", $_SERVER['REQUEST_URI']);
+$url = $urlArray[0];
 $urlArray = explode("/",$url);
 if(!$urlArray[0])
 {
@@ -13,34 +13,49 @@ if(count($urlArray))
 {
 	$action = $urlArray[0];
 }
+else{
+	$action = "";
+}
 array_shift($urlArray);
 $queryString = $urlArray;
 
 if($controller == RESTAPI)
 {
+	$param = $action;
 	if(!array_key_exists('HTTP_AUTHTOKEN', $_SERVER))
 	{
-		header('HTTP/1.0 401 Unauthorized Action');
+		http_response_code(401);
 		return "Unauthorized Action";
 	}
 	$authtoken = $_SERVER['HTTP_AUTHTOKEN'];
-	$auth = new Authentication;
+	$method = $_SERVER['REQUEST_METHOD'];
 	try
 	{
-		$auth->validateToken($authtoken);
-	}catch(UnAuthorizedActionException $e)
+		Authentication::validateToken($authtoken);
+	}
+	catch(UnAuthorizedActionException $e)
 	{
-		header('HTTP/1.0 401 '. $e->getMessage());
+		http_response_code(401);
 		return "Unauthorized Action";
 	}
 
-	if ($_SERVER['REQUEST_METHOD'] === 'POST') 
+	if ($method === 'POST') 
 	{
     	$action = "create";
 	}
-	else if ($_SERVER['REQUEST_METHOD'] === 'GET') 
+	else if ($method === 'GET') 
 	{
 		$action = "all";
+	}
+	if($param && $method === 'POST')
+	{
+		$action = "edit";
+		$queryString = $param;
+	}
+	if($param && $method === 'GET')
+	{
+		$action = "get";
+		$queryString = $param;
 	}
 }
 $controllerName = $controller;
@@ -51,12 +66,12 @@ $dispatch = new $controller();
 
 if ((int)method_exists($controller, $action)) 
 {
-    echo json_encode(call_user_func_array(array($dispatch,$action),$queryString));
+    echo json_encode(call_user_func_array(array($dispatch,$action), array($queryString)));
     return;
 }
 else
 {    
     /* Error Generation Code Here */
-    header('HTTP/1.0 405 Method Not Allowed ');
+    http_response_code(405);
     return "405";
 }

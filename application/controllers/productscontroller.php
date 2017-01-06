@@ -7,6 +7,11 @@ class ProductsController {
         
     }
 
+    function checkRequiredFields()
+    {
+
+    }
+
     function create ()
     {
         $product = new product();
@@ -18,14 +23,19 @@ class ProductsController {
 
     public function all ()
     {
-        $product = new Product;
+        $product = new product();
+        if(array_key_exists("name", $_GET))
+        {
+            $name = $_GET['name'];
+            return $product->search($name);
+        }
         return $product->getall();
     }
 
-    function get ()
+    function get ($id)
     {
         $product = new Product;
-        return $product->getall();
+        return $product->get($id);
     }
  
     function __destruct () 

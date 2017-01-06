@@ -16,7 +16,13 @@ class AuthTokenController
     {
         $authClass = new Authentication;
         try{
+            $authClass->checkIfPostDataPresent();
+            $authClass->checkIfUserExists();
             $userid = $authClass->checkUserAuth();
+            $token = $authClass->createNewToken($userid);
+            $content = array();
+            $content["token"] = $token;
+            return array("content"=> $content);
         }
         catch(UserNotFoundException $e)
         {
@@ -34,10 +40,7 @@ class AuthTokenController
             return $e->getMessage();
         }
         
-        $token = $authClass->createNewToken($userid);
-        $content = array();
-        $content["token"] = $token;
-        return array("content"=> $content);
+
     }
  
     function __destruct() 

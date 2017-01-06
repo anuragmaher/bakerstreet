@@ -14,7 +14,7 @@ class Authentication
         $this->password = $password;
     }
 
-    function checkPostData ()
+    function checkIfPostDataPresent ()
     {
     	if(!array_key_exists("password", $_POST) || !array_key_exists("username", $_POST))
         {
@@ -23,7 +23,7 @@ class Authentication
         $this->setUserAndPassword($_POST['username'], $_POST['password']);
     }
 
-    function validateToken ($token)
+    public static function validateToken ($token)
     {
         $authtoken = new AuthToken();
         $result = $authtoken->checkToken($token);
@@ -67,8 +67,6 @@ class Authentication
 
     function checkUserAuth ()
     {
-    	$this->checkPostData();
-        $this->checkIfUserExists();
         $userid = $this->checkPasswordMatch();
         return $userid;
     }

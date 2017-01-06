@@ -4,17 +4,39 @@ class SQLBase
 {
     protected $_conn;
     protected $_table;
- 
+    protected $host;
+    protected $username;
+    protected $password;
+    protected $db;
+
     /** Connects to database **/
- 
-    function connect($server, $username, $password, $db) 
+    function setVars($mysqlurl)
     {
-        $this->_conn = new mysqli($server, $username, $password, $db);
+        $mysqlurl = str_replace("mysql://", "", $mysqlurl);
+        $mysqlurl = str_replace("?reconnect=true", "", $mysqlurl);
+        $urlarray = explode("/", $mysqlurl);
+        $this->db = $urlarray[1];
+        $urlarray = explode("@", $urlarray[0]);
+        $this->host = $urlarray[1];
+        $urlarray = explode(":", $urlarray[0]);
+        $this->username = $urlarray[0];
+        $this->password = $urlarray[1];
+    }
+ 
+    function connect($mysqlurl) 
+    {
+        $this->setVars($mysqlurl);
+        $this->_conn = new mysqli($this->host, $this->username, $this->password, $this->db);
         /* check connection */
         if ($this->_conn->connect_errno) 
         {
             die("Connect failed: " . $server);
         }
+    }
+
+    function escape_string ($input)
+    {
+        return $this->_conn->escape_string($input);
     }
  
     /** Disconnects from database **/
@@ -33,8 +55,8 @@ class SQLBase
      
     function select($id) 
     {
-        $query = 'select * from `'.$this->_table.'` where `id` = \''.mysql_real_escape_string($id).'\'';
-        return $this->query($query, 1);    
+        $query = 'select * from '.$this->_table.' where id = $id';
+        return $this->query($query);    
     }
  
     /** Custom SQL Query **/
