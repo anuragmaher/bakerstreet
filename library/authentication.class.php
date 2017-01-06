@@ -8,14 +8,19 @@ class Authentication
     	$this->password = null;
     }
 
+    function setUserAndPassword ($username, $password)
+    {
+        $this->username = $username;
+        $this->password = $password;
+    }
+
     function checkPostData ()
     {
     	if(!array_key_exists("password", $_POST) || !array_key_exists("username", $_POST))
         {
         	throw new InsufficientDataException("username password fields are required");
         }
-    	$this->username = $_POST['username'];
-    	$this->password = $_POST['password'];
+        $this->setUserAndPassword($_POST['username'], $_POST['password']);
     }
 
     function validateToken ($token)
