@@ -3,7 +3,7 @@
 if(getenv('CLEARDB_DATABASE_URL'))
 {
 	define('MYSQL_URI', getenv('CLEARDB_DATABASE_URL'));
-	define('BASEURL', 'https://bakerstreetwala.herokuapp.com');
+	define('BASEURL', 'https://anuragyotest.herokuapp.com');
 }
 else
 {
