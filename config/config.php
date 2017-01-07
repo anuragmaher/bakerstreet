@@ -2,7 +2,7 @@
 
 if(getenv('ENV') == "HEROKU")
 {
-	define('MYSQL_URI', getenv('DATABASE_URL'));
+	define('MYSQL_URI', getenv('CLEARDB_DATABASE_URL'));
 	define('BASEURL', 'https://bakerstreetwala.herokuapp.com');
 }
 else

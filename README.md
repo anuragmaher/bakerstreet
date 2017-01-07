@@ -331,7 +331,7 @@ Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 $ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
 $ cd bakerstreet
 $ heroku create
-$ git push heroku master
+$ heroku addons:create cleardb:ignite
 $ heroku open
 ```
 
