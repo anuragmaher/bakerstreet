@@ -50,9 +50,8 @@ Return value will be like
 
 ###Example
 ```
-curl --data "username=admin&password=admin" \
-	  "https://bakerstreetwala.herokuapp.com/authtoken/create"
-
+curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
+	  -d "username=admin&password=admin"
 ```
 
 
@@ -145,9 +144,10 @@ description      | **string** - description for the product
 #### Example: 
 
 ```
-curl --data "name=cake&description=test" \
+curl -i "https://bakerstreetwala.herokuapp.com/products"\
+	  -d "name=cake&description=test"\
 	  -H "authtoken: 58712b8969a5a"\
-     "https://bakerstreetwala.herokuapp.com/products" 
+ 
 ```
 **NOTE** : name and description are required fields
 
@@ -168,7 +168,6 @@ curl --data "name=cake&description=test" \
 
 
 ### Listing all the products
-
 ```
 GET /products
 ```
@@ -176,7 +175,7 @@ GET /products
 
 #### Example
 ```
-curl "https://bakerstreetwala.herokuapp.com/products" \
+curl -i "https://bakerstreetwala.herokuapp.com/products" \
 	  -H "authtoken: 58712b8969a5a"
 ```
 
@@ -215,7 +214,7 @@ DELETE /products/1
 #### Example
 
 ```
-curl "https://bakerstreetwala.herokuapp.com/products/19" \
+curl -i "https://bakerstreetwala.herokuapp.com/products/19" \
      -X "DELETE" \
 	  -H "authtoken: 58712b8969a5a"
 
@@ -237,10 +236,10 @@ PUT /products/1
 
 
 ```
-curl --data "name=newname&description=new+description" \
+curl -i "https://bakerstreetwala.herokuapp.com//products/20"\
 	  -X "PUT" \
-	  -H "authtoken: 58712b8969a5a" 
-	  "http://fluidtasks.com/products/20"
+	  -H "authtoken: 58712b8969a5a"\
+	  -d "name=newname&description=new+description"
 ```
 
 **NOTE** : name and description are required fields
@@ -269,7 +268,7 @@ GET /products?name=cake
 #### Example
 
 ```
-curl "https://bakerstreetwala.herokuapp.com/products?name=latest" \
+curl -i "https://bakerstreetwala.herokuapp.com/products?name=latest" \
 	  -H "authtoken: 58712b8969a5a"
 ```
 
@@ -332,8 +331,31 @@ $ heroku open migrate/db
 
 ```
 
-## Testing
+## Executing Test cases 
 
 ```
 $ heroku open tests/auth
+```
+
+### Sample Test Cases Execution
+```
+Automated Testing
+
+Test 1- username: usernotpresent and password: junk 
+Test case passed
+Test 2- username: admin and password: junk 
+Test case passed
+Test 3- username: admin and password: admin 
+All tests for authtication passed Token: 58713765e1732
+
+Now all the tests will use this token : 58713765e1732 for authentication 
+
+Test 4 : Get products without authtication GET /products 
+Test case passed
+Test 5 : Get products without authtication GET /products and token
+Test case passed
+
+Authentication complete
+
+"All Tests Passed"
 ```

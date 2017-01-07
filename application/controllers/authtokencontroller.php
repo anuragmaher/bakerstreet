@@ -47,7 +47,6 @@ class AuthTokenController
             header('HTTP/1.0 401' . $e->getMessage());
             return $e->getMessage();
         }
-        
 
     }
  

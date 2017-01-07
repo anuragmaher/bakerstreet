@@ -14,7 +14,6 @@ class MigrateController {
               "`username` varchar(255) NOT NULL, " .
               "`password` varchar(255) NOT NULL," .
               "`lastLogin` datetime DEFAULT NULL," . 
-              "`modified` datetime DEFAULT NULL," .
               "`created_at` datetime DEFAULT NULL," . 
               "`updated_at` datetime DEFAULT NULL," . 
               "PRIMARY KEY (`id`)" .
@@ -52,7 +51,9 @@ class MigrateController {
 
     public function createAdminUser()
     {
-        return "insert into `users`(`username`, `password`, `created_at`, `updated_at`) values('admin', 'admin', now(), now());";
+        $username = USERNAME;
+        $password = Encryption::encrypt(PASSWORD);
+        return "insert into `users`(`username`, `password`, `created_at`, `updated_at`) values('$username', '$password', now(), now());";
     }
 
     public function db()

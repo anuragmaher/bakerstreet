@@ -14,3 +14,6 @@ else
 // Here we define what are the controllers for REST API. 
 // By doing this all the REST calls will be routed to specific controller actions. 
 define("REST_CONTROLLER", "products");
+
+define("USERNAME", "admin");
+define("PASSWORD", "admin");
