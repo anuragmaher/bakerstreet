@@ -9,7 +9,7 @@ class MigrateController {
 
     public function userCreationQuery ()
     {
-        $query= "CREATE TABLE IF NOT EXISTS `users` (" .
+        return "CREATE TABLE IF NOT EXISTS `users` (" .
               "`id` int(11) NOT NULL AUTO_INCREMENT, " .
               "`username` varchar(255) NOT NULL, " .
               "`password` varchar(255) NOT NULL," .
@@ -18,7 +18,6 @@ class MigrateController {
               "`updated_at` datetime DEFAULT NULL," . 
               "PRIMARY KEY (`id`)" .
               ") ENGINE=InnoDB DEFAULT CHARSET=latin1; ";
-        return $query;
     }
 
     public function userTokenCreationQuery ()
@@ -67,7 +66,7 @@ class MigrateController {
         $query = $this->productCreationQuery();
         $sqlbase->insert($query);
         $user = new User;
-        $u = $user->getUserByName("admin");
+        $u = $user->getUserByName(USERNAME);
         if(count($u) > 0)
         {
             echo "User already present, skipping";
