@@ -1,5 +1,7 @@
 <?php 
 
+use App\Routes as Routes;
+
 // Request URI is the url without get params 
 $request_uri = $_SERVER['REQUEST_URI'];
 $urlArray = explode("?", $request_uri);
@@ -42,7 +44,7 @@ if($controller == REST_CONTROLLER)
 	$method = $_SERVER['REQUEST_METHOD'];
 	try
 	{
-		Authentication::validateToken($authtoken);
+		Auth\Authentication::validateToken($authtoken);
 	}
 	catch(UnAuthorizedActionException $e)
 	{

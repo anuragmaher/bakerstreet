@@ -1,7 +1,9 @@
 <?php
 /* AuthToken is DB class for database related operations */
 
-class AuthToken extends BaseModel 
+namespace Auth;
+
+class AuthToken extends \BaseModel
 {
 	protected $_table = "authtokens";
 

@@ -1,4 +1,7 @@
 <?php
+
+namespace Auth;
+
 class Encryption 
 {
     function __construct () 

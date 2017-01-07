@@ -1,5 +1,7 @@
 <?php
 
+namespace App;
+
 class Routes
 {
 
@@ -12,8 +14,14 @@ class Routes
 	* @throws 
 	* @author name
 	*/
-	public function functionName($val1){
+	public function getController ($val1)
+	{
 		
+	}
+
+	public function getAction ()
+	{
+
 	}
 
 }

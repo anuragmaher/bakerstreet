@@ -64,7 +64,7 @@ class Authentication
     */
     function createNewToken ($userid)
     {
-    	$authtoken = new \AuthToken();
+    	$authtoken = new AuthToken();
     	return $authtoken->createToken($userid);
     }
 

@@ -18,7 +18,7 @@ class User extends BaseModel
 
 	public function checkPassword ($username, $password)
 	{
-		$password = Encryption::encrypt($password);
+		$password = Auth\Encryption::encrypt($password);
 		$result = $this->query("select * from " . $this->_table . 
 								" where username = '$username' and password = '$password'");
 		return $result;
@@ -28,5 +28,4 @@ class User extends BaseModel
 	{
 		parent::__destruct();
 	}
-
 }

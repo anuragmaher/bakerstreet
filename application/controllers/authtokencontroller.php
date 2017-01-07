@@ -3,6 +3,7 @@
 /**
 * This class handles authentication for a user. 
 */
+use Auth\Authentication as Authentication;
 
 class AuthTokenController 
 {
@@ -21,7 +22,7 @@ class AuthTokenController
     */
     function create()
     {
-        $authClass = new Auth\Authentication;
+        $authClass = new Authentication;
         try{
             $source = $_POST;
             $authClass->setPostData($source);

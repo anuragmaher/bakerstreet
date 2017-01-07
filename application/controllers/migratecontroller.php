@@ -51,7 +51,7 @@ class MigrateController {
     public function createAdminUser()
     {
         $username = USERNAME;
-        $password = Encryption::encrypt(PASSWORD);
+        $password = Auth\Encryption::encrypt(PASSWORD);
         return "insert into `users`(`username`, `password`, `created_at`, `updated_at`) values('$username', '$password', now(), now());";
     }
 

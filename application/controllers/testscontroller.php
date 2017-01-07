@@ -1,5 +1,7 @@
 <?php
 
+use Auth\Authentication as Authentication;
+
 class TestsController {
     protected $userid = null;
     protected $token = null;
