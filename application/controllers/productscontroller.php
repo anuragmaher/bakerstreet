@@ -65,7 +65,7 @@ class ProductsController {
         $this->setInputFields($source);
         $product = new Product;
         $productid = $product->createnew($this->name, $this->description, $this->status);
-        if($status)
+        if($productid)
         {
             http_response_code(201);
             return array("product" => $this->get($productid));
