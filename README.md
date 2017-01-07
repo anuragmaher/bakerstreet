@@ -330,9 +330,29 @@ Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 ```
 $ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
 $ cd bakerstreet
+$ heroku login
 $ heroku create herokuappname
+```
+**Now create a mysql instance**
+
+```
 $ heroku addons:create cleardb:ignite
+```
+
+**Adding heroku as remote for pushing and deploying**
+
+```
 $ heroku git:remote -a herokuappname
+```
+**pushing code to heroku directory**
+
+```
+$ git push heroku master
+```
+
+**Running Database migrations, creating of tables and creating admin user**
+
+```
 $ heroku open migrate/db
 
 ```
@@ -340,5 +360,5 @@ $ heroku open migrate/db
 ## Testing
 
 ```
-http://bakerstreetwala.herokuapp.com/tests/auth
+$ heroku open tests/auth
 ```
