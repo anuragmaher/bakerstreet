@@ -1,6 +1,6 @@
 <?php
 
-if(getenv('ENV') == "HEROKU")
+if(getenv('CLEARDB_DATABASE_URL'))
 {
 	define('MYSQL_URI', getenv('CLEARDB_DATABASE_URL'));
 	define('BASEURL', 'https://bakerstreetwala.herokuapp.com');
