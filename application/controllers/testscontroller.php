@@ -100,7 +100,6 @@ class TestsController {
         echo "<br/> <b>Test 7 </b>: POST /products with token and name and description </br>";
         $result = MyCurl::callAPI("POST", BASEURL . "/products", "name=anurag&description=test", $this->token);
         echo print_r($result, true);
-        exit();
     }
 
     function listsProduct()
@@ -144,6 +143,9 @@ class TestsController {
         $this->getProductsWithWrongAuthenticationHeader();
         $this->getProductsWithAuthenticationHeader();
         $this->createProduct();
+        $this->listsProduct();
+        $this->getOneProduct();
+        $this->updateProduct();
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
     }

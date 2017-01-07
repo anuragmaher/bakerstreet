@@ -40,6 +40,11 @@ if($controller == REST_CONTROLLER)
 		$action = "get";
 		$queryString = $param;
 	}
+	if($method == "PUT" && $param)
+	{
+		$action = "edit";
+		$queryString = $param;
+	}
 	if($method == "DELETE" && $param)
 	{
 		$queryString = $param;	

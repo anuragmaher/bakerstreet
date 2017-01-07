@@ -14,6 +14,7 @@ class MyCurl{
                 break;
             case "PUT":
                 curl_setopt($curl, CURLOPT_PUT, 1);
+                curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 break;
             default:
                 if ($data)
