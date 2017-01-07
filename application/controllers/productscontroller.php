@@ -46,6 +46,10 @@ class ProductsController {
     */
     function edit ($productid)
     {
+        if(!$productid)
+        {
+            throw new InsufficientDataException(" product id not sent ");
+        }
         parse_str(file_get_contents("php://input"),$source);
         $this->setInputFields($source);
         $product = new Product;
@@ -99,11 +103,11 @@ class ProductsController {
     {
         $product = new Product;
         $p = $product->get($productid);
-        if(!count($p))
+        if(!$p)
         {
            throw new ResourceNotFoundException(" not found "); 
         }
-        return $p;
+        return array("product" => $p);
     }
 
     /**
@@ -114,6 +118,10 @@ class ProductsController {
     */
     function delete ($productid)
     {
+        if(!$productid)
+        {
+            throw new InsufficientDataException(" product id not supplied ");
+        }
         $product = new Product;
         $p = $this->get($productid);
         if(!count($p))

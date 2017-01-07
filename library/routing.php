@@ -6,29 +6,11 @@ use App\Routes as Routes;
 $request_uri = $_SERVER['REQUEST_URI'];
 $urlArray = explode("?", $request_uri);
 $url = $urlArray[0];
-$urlArray = explode("/", $url);
-// This is for heroku deployment, we are getting first element as null
-if(!$urlArray[0])
-{
-	array_shift($urlArray);
-}
-$controller = $urlArray[0];
-if(!$controller)
-{
-	echo " Follow instructions on <a href='https://github.com/anuragmaher/bakerstreet'> https://github.com/anuragmaher/bakerstreet </a>";
-	exit();
-}
-array_shift($urlArray);
-if(count($urlArray))
-{
-	$action = $urlArray[0];
-}
-else{
-	// Set action as null 
-	$action = "";
-}
-array_shift($urlArray);
-$queryString = $urlArray;
+
+$routes = new Routes();
+$controller = $routes->getController($url);
+$action = $routes->getAction($url);
+$queryString = $routes->getQueryString();
 
 $jsonResponse = false;
 
@@ -51,36 +33,19 @@ if($controller == REST_CONTROLLER)
 		http_response_code(401);
 		return "Unauthorized Action";
 	}
-	if ($method === 'POST') 
-	{
-    	$action = "create";
-	}
-	else if ($method === 'GET') 
-	{
-		$action = "all";
-	}
-	else if($method === "DELETE")
-	{
-		$action = "delete";
-	}
-	if($method === 'PUT')
-	{
-		$action = "edit";
-		$queryString = $param;
-	}
-	if($param && $method === 'GET')
+	$action = $routes->getRestAction($method);
+	
+	if($method == "GET" && $param)
 	{
 		$action = "get";
 		$queryString = $param;
 	}
-	if($method === 'DELETE')
+	if($method == "DELETE" && $param)
 	{
-		$action = "delete";
-		$queryString = $param;
+		$queryString = $param;	
 	}
 	$jsonResponse = true;
 }
-$controllerName = $controller;
 $controller = ucwords($controller);
 
 $controller .= 'Controller';
