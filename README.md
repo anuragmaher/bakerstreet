@@ -327,12 +327,14 @@ Cache-Control: no-cache
 
 Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
-```sh
+```
 $ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
 $ cd bakerstreet
-$ heroku create
+$ heroku create herokuappname
 $ heroku addons:create cleardb:ignite
-$ heroku open
+$ heroku git:remote -a herokuappname
+$ heroku open migrate/db
+
 ```
 
 ## Testing
