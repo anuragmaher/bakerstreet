@@ -113,23 +113,25 @@ class TestsController {
     function getOneProduct()
     {
         echo "<br/> <b>Test 9 </b>: POST /products with token and name and description </br>";
-        $result = MyCurl::callAPI("GET", BASEURL . "/products/1", "", $this->token);
-        echo print_r($result, true);
-    }
-
-    function deleteProduct ()
-    {
-        echo "<br/> <b>Test 10 </b>: DELETE /products/1 with token </br>";
-        $result = MyCurl::callAPI("DELETE", BASEURL . "/products/1", "", $this->token);
+        $result = MyCurl::callAPI("GET", BASEURL . "/products/2", "", $this->token);
         echo print_r($result, true);
     }
 
     function updateProduct ()
     {
-        echo "<br/> <b>Test 11 </b>: PUT /products with token and name and description </br>";
-        $result = MyCurl::callAPI("PUT", BASEURL . "/products/1", "name=newname&description=test", $this->token);
+        echo "<br/> <b>Test 10 </b>: PUT /products with token and name and description </br>";
+        $result = MyCurl::callAPI("PUT", BASEURL . "/products/2", "name=newname&description=test", $this->token);
         echo print_r($result, true);
     }
+
+    function deleteProduct ()
+    {
+        echo "<br/> <b>Test 11 </b>: DELETE /products/1 with token </br>";
+        $result = MyCurl::callAPI("DELETE", BASEURL . "/products/2", "", $this->token);
+        echo print_r($result, true);
+    }
+
+
 
     function start ()
     {
@@ -151,6 +153,7 @@ class TestsController {
         $this->listsProduct();
         $this->getOneProduct();
         $this->updateProduct();
+        $this->deleteProduct();
         
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
