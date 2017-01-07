@@ -3,7 +3,7 @@
 if(getenv('CLEARDB_DATABASE_URL'))
 {
 	define('MYSQL_URI', getenv('CLEARDB_DATABASE_URL'));
-	define('BASEURL', 'https://anuragyotest.herokuapp.com');
+	define('BASEURL', 'https://' . $_SERVER['HTTP_HOST']);
 }
 else
 {
