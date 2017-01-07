@@ -315,7 +315,7 @@ Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 **Get the code from GitHub**
 
 ```
-$ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
+$ git clone https://github.com/anuragmaher/bakerstreet.git # or clone your own fork
 $ cd bakerstreet
 ```
 **Heroku login and creating an app**
