@@ -146,8 +146,7 @@ description      | **string** - description for the product
 ```
 curl -i "https://bakerstreetwala.herokuapp.com/products"\
 	  -d "name=cake&description=test"\
-	  -H "authtoken: 58712b8969a5a"\
- 
+	  -H "authtoken: 58712b8969a5a"
 ```
 **NOTE** : name and description are required fields
 
@@ -166,12 +165,35 @@ curl -i "https://bakerstreetwala.herokuapp.com/products"\
 }
 ```
 
+### Get a Product 
+```
+GET /products/1
+```
+
+#### Example
+```
+curl -i "https://bakerstreetwala.herokuapp.com/products/1" \
+	  -H "authtoken: 58712b8969a5a"
+```
+###Response
+```
+{
+   "product": 
+   {
+	  "id": "1",
+	  "name": "Cake",
+	  "description": "Eggless Dark Choclate",
+	  "status": "active",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+   }
+}
+```
 
 ### Listing all the products
 ```
 GET /products
 ```
-
 
 #### Example
 ```
@@ -236,10 +258,10 @@ PUT /products/1
 
 
 ```
-curl -i "https://bakerstreetwala.herokuapp.com//products/20"\
+curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
 	  -X "PUT" \
-	  -H "authtoken: 58712b8969a5a"\
-	  -d "name=newname&description=new+description"
+	  -d "name=newname&description=new+description"\
+	  -H "authtoken: 58712b8969a5a"
 ```
 
 **NOTE** : name and description are required fields
@@ -249,9 +271,9 @@ curl -i "https://bakerstreetwala.herokuapp.com//products/20"\
 {
    "product": 
    {
-	  "id": "20",
-	  "name": "latest cake",
-	  "description": "new cake",
+	  "id": "1",
+	  "name": "newname",
+	  "description": "new description",
 	  "status": "active",
 	  "created_time": "2016-06-05T17:38:06-0700",
 	  "updated_time": "2016-06-05T20:09:23-0700"
