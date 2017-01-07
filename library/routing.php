@@ -10,6 +10,11 @@ if(!$urlArray[0])
 	array_shift($urlArray);
 }
 $controller = $urlArray[0];
+if(!$controller)
+{
+	echo " Follow instructions on <a href='https://github.com/anuragmaher/bakerstreet'> https://github.com/anuragmaher/bakerstreet </a>";
+	exit();
+}
 array_shift($urlArray);
 if(count($urlArray))
 {
