@@ -83,7 +83,7 @@ class ProductsController {
         if(array_key_exists("name", $_GET))
         {
             $name = $_GET['name'];
-            return $product->search($name);
+            return array("products" => $product->search($name));
         }
         return array("products" => $product->getall());
     }

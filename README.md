@@ -53,21 +53,19 @@ Return value will be like
 POST /authtoken/create HTTP/1.1
 Host: bakerstreetwala.herokuapp.com
 Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Type: multipart/form-data; boundary=----DATA
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW
+------DATA
 Content-Disposition: form-data; name="username"
 
 admin
-------WebKitFormBoundary7MA4YWxkTrZu0gW
+------DATA
 Content-Disposition: form-data; name="password"
 
 admin
-------WebKitFormBoundary7MA4YWxkTrZu0gW
+------DATA
 Content-Disposition: form-data; name=""
 
-
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
 ```
 
 
@@ -164,17 +162,17 @@ POST /products HTTP/1.1
 Host: bakerstreetwala.herokuapp.com
 authtoken: 586fcd5e3315d
 Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Type: multipart/form-data; boundary=----DATA
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW
+------DATA
 Content-Disposition: form-data; name="name"
 
 Cake
-------WebKitFormBoundary7MA4YWxkTrZu0gW
+------DATA
 Content-Disposition: form-data; name="description"
 
 Eggless Dark Choclate
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
+------DATA--
 ```
 **NOTE** : name and description are required fields
 
@@ -200,6 +198,31 @@ Eggless Dark Choclate
 GET /products
 ```
 
+####Response
+```
+{
+   "products": 
+   [
+   {
+	  "id": "1",
+	  "name": "Cake",
+	  "description": "Eggless Dark Choclate",
+	  "status": "active",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+   },
+   {
+   	  "id": "2",
+	  "name": "Cake new one",
+	  "description": "Eggless Dark Choclate",
+	  "status": "active",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+    }
+   ]
+}
+```
+
 #### Example:
 ```
 GET /products HTTP/1.1
@@ -222,9 +245,16 @@ DELETE /products/10 HTTP/1.1
 Host: bakerstreetwala.herokuapp.com
 authtoken: 58707e2008771
 Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Type: multipart/form-data; boundary=----DATA
 
 
+```
+
+####Response
+```
+{
+    "status":"done"
+}
 ```
 
 
@@ -242,10 +272,25 @@ authtoken: 58707e2008771
 Content-Type: application/x-www-form-urlencoded
 Cache-Control: no-cache
 
-name=latest+cake+12&description=new+cake
+name=latest+cake+12&description=new+cake&status=deleted
 ```
 
 **NOTE** : name and description are required fields
+
+#### Response
+```
+{
+   "product": 
+   {
+	  "id": "1",
+	  "name": "latest cake",
+	  "description": "new cake",
+	  "status": "active",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+   }
+}
+```
 
 ### Search 
 
@@ -260,6 +305,21 @@ GET /products?name=cake HTTP/1.1
 Host: bakerstreetwala.herokuapp.com
 authtoken: 58707bf7b4132
 Cache-Control: no-cache
+```
+
+#### Response
+```
+{
+   "products": 
+   {
+	  "id": "1",
+	  "name": "latest cake",
+	  "description": "new cake",
+	  "status": "active",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+   }
+}
 ```
 
 
