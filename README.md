@@ -42,7 +42,7 @@ Return value will be like
     "error": null,
     "content": {
         "expires": 1408109484,       // yet to be implemented
-        "token": "633uq4t0ee23dsfd1mdllnv2h1vs32"
+        "token": "58712b8969a5a"
     }
 }
 ```
@@ -50,21 +50,8 @@ Return value will be like
 
 ###Example
 ```
-POST /authtoken/create HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----DATA
-
-------DATA
-Content-Disposition: form-data; name="username"
-
-admin
-------DATA
-Content-Disposition: form-data; name="password"
-
-admin
-------DATA
-Content-Disposition: form-data; name=""
+curl --data "username=admin&password=admin" \
+	  "https://bakerstreetwala.herokuapp.com/authtoken/create"
 
 ```
 
@@ -158,21 +145,9 @@ description      | **string** - description for the product
 #### Example: 
 
 ```
-POST /products HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-authtoken: 586fcd5e3315d
-Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----DATA
-
-------DATA
-Content-Disposition: form-data; name="name"
-
-Cake
-------DATA
-Content-Disposition: form-data; name="description"
-
-Eggless Dark Choclate
-------DATA--
+curl --data "name=cake&description=test" \
+	  -H "authtoken: 58712b8969a5a"\
+     "https://bakerstreetwala.herokuapp.com/products" 
 ```
 **NOTE** : name and description are required fields
 
@@ -198,7 +173,14 @@ Eggless Dark Choclate
 GET /products
 ```
 
-####Response
+
+#### Example
+```
+curl "https://bakerstreetwala.herokuapp.com/products" \
+	  -H "authtoken: 58712b8969a5a"
+```
+
+#### Response
 ```
 {
    "products": 
@@ -223,15 +205,6 @@ GET /products
 }
 ```
 
-#### Example:
-```
-GET /products HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-authtoken: 58707bf7b4132
-Cache-Control: no-cache
-
-```
-
 
 ### Delete 
 
@@ -239,18 +212,16 @@ Cache-Control: no-cache
 DELETE /products/1
 ```
 
+#### Example
 
 ```
-DELETE /products/10 HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-authtoken: 58707e2008771
-Cache-Control: no-cache
-Content-Type: multipart/form-data; boundary=----DATA
-
+curl "https://bakerstreetwala.herokuapp.com/products/19" \
+     -X "DELETE" \
+	  -H "authtoken: 58712b8969a5a"
 
 ```
 
-####Response
+#### Response
 ```
 {
     "status":"done"
@@ -266,13 +237,10 @@ PUT /products/1
 
 
 ```
-PUT /products/1 HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-authtoken: 58707e2008771
-Content-Type: application/x-www-form-urlencoded
-Cache-Control: no-cache
-
-name=latest+cake+12&description=new+cake&status=deleted
+curl --data "name=newname&description=new+description" \
+	  -X "PUT" \
+	  -H "authtoken: 58712b8969a5a" 
+	  "http://fluidtasks.com/products/20"
 ```
 
 **NOTE** : name and description are required fields
@@ -301,11 +269,12 @@ GET /products?name=cake
 #### Example
 
 ```
-GET /products?name=cake HTTP/1.1
-Host: bakerstreetwala.herokuapp.com
-authtoken: 58707bf7b4132
-Cache-Control: no-cache
+curl "https://bakerstreetwala.herokuapp.com/products?name=latest" \
+	  -H "authtoken: 58712b8969a5a"
 ```
+
+**Note: Currently search over only name is available**
+
 
 #### Response
 ```
@@ -327,9 +296,16 @@ Cache-Control: no-cache
 
 Install the [Heroku Toolbelt](https://toolbelt.heroku.com/).
 
+**Get the code from GitHub**
+
+
 ```
 $ git clone git@github.com:anuragmaher/bakerstreet.git # or clone your own fork
 $ cd bakerstreet
+```
+**Heroku login and creating an app**
+
+```
 $ heroku login
 $ heroku create herokuappname
 ```

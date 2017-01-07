@@ -1,9 +1,10 @@
 <?php 
 
 // Request URI is the url without get params 
-$urlArray = explode("?", $_SERVER['REQUEST_URI']);
+$request_uri = $_SERVER['REQUEST_URI'];
+$urlArray = explode("?", $request_uri);
 $url = $urlArray[0];
-$urlArray = explode("/",$url);
+$urlArray = explode("/", $url);
 // This is for heroku deployment, we are getting first element as null
 if(!$urlArray[0])
 {
@@ -29,7 +30,7 @@ $queryString = $urlArray;
 
 $jsonResponse = false;
 
-if($controller == RESTAPI)
+if($controller == REST_CONTROLLER)
 {
 	$param = $action;
 	if(!array_key_exists('HTTP_AUTHTOKEN', $_SERVER))
@@ -103,4 +104,8 @@ try{
 
 }catch(ResourceNotFoundException $e){
 	echo json_encode(array("status" => "not found" ));
+}
+catch(InsufficientDataException $e)
+{
+	echo json_encode(array("status" => "InsufficientData: " . $e->getMessage() ));
 }

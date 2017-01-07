@@ -13,4 +13,4 @@ else
 
 // Here we define what are the controllers for REST API. 
 // By doing this all the REST calls will be routed to specific controller actions. 
-define("RESTAPI", "products");
+define("REST_CONTROLLER", "products");
