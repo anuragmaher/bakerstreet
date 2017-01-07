@@ -142,7 +142,8 @@ class TestsController {
         $this->getProductsWithoutAuthentication();
         $this->getProductsWithWrongAuthenticationHeader();
         $this->getProductsWithAuthenticationHeader();
-         /*
+        echo "<br/> <b> More tests related to product update delete search and edit coming</b>";
+        /*
         * Have to write these tests- just the basic tests written.
 
         $this->createProduct();
