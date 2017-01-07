@@ -80,8 +80,6 @@ class ProductsController {
     public function all ()
     {
         $product = new Product;
-        echo print_r($_GET, true);
-        exit();
         if(array_key_exists("name", $_GET))
         {
             $name = $_GET['name'];
