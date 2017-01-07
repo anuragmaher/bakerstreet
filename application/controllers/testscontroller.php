@@ -146,12 +146,12 @@ class TestsController {
         echo "<br/> <b> More tests related to product update delete search and edit coming</b>";
         /*
         * Have to write these tests- just the basic tests written.
-
+        */
         $this->createProduct();
         $this->listsProduct();
         $this->getOneProduct();
         $this->updateProduct();
-        */
+        
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
     }
