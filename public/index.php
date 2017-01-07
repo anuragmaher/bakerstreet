@@ -1,7 +1,5 @@
 <?php
 
-echo print_r($_SERVER);
-exit();
 
 require_once("../config/config.php");
 require_once("../library/bootstrap.php");
