@@ -92,7 +92,7 @@ class TestsController {
         echo " Now all the tests will use this token : " . $this->token . " for authentication </br> ";
         $this->getProductsWithoutAuthentication();
         $this->getProductsWithAuthenticationHeader();
-        echo "<br/><br/><br/><br/>";
+        echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
     }
  

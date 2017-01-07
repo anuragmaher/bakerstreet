@@ -1,24 +1,25 @@
 CREATE TABLE IF NOT EXISTS `users` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(255) NOT NULL,
-  `lastLogin` DATETIME NULL,
-  `modified` DATETIME NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `lastLogin` datetime DEFAULT NULL,
+  `modified` datetime DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 CREATE TABLE IF NOT EXISTS `authtokens` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `userid` INT NOT NULL,
-  `token` VARCHAR(255) NOT NULL,
-  `created_at` DATETIME NULL,
-  `updated_at` DATETIME NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` int(11) NOT NULL,
+  `token` varchar(255) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `token_UNIQUE` (`token` ASC),
-  FOREIGN KEY (`userid`) REFERENCES users(`id`)
-)ENGINE = InnoDB;
+  UNIQUE KEY `token_UNIQUE` (`token`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `authtokens_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 insert into `users`(`username`, `password`, `created_at`, `updated_at`) values('admin', 'admin', now(), now());
 

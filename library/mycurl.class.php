@@ -19,10 +19,7 @@ class MyCurl{
                 if ($data)
                     $url = sprintf("%s?%s", $url, http_build_query($data));
         }
-
-        // Optional Authentication:
         curl_setopt($curl, CURLOPT_URL, $url);
- 
         $headers = array(
     		'authtoken: '. $token,
 		);

@@ -22,6 +22,8 @@ else{
 array_shift($urlArray);
 $queryString = $urlArray;
 
+$jsonResponse = false;
+
 if($controller == RESTAPI)
 {
 	$param = $action;
@@ -69,7 +71,7 @@ if($controller == RESTAPI)
 		$action = "delete";
 		$queryString = $param;
 	}
-
+	$jsonResponse = true;
 }
 $controllerName = $controller;
 $controller = ucwords($controller);
@@ -80,7 +82,10 @@ $dispatch = new $controller();
 try{
 	if ((int)method_exists($controller, $action)) 
 	{
-		//header('Content-Type: application/json');
+		if($jsonResponse)
+		{
+			header('Content-Type: application/json');
+		}
 	    echo json_encode(call_user_func_array(array($dispatch,$action), array($queryString)));
 	    return;
 	}

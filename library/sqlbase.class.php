@@ -77,6 +77,7 @@ class SQLBase
     function insert($query)
     {
         $result = $this->_conn->query($query);
+        //echo print_r($this->_conn->error);
         return $result;
     }
 
