@@ -250,7 +250,7 @@ curl --data "name=newname&description=new+description" \
 {
    "product": 
    {
-	  "id": "1",
+	  "id": "20",
 	  "name": "latest cake",
 	  "description": "new cake",
 	  "status": "active",
@@ -275,13 +275,12 @@ curl "https://bakerstreetwala.herokuapp.com/products?name=latest" \
 
 **Note: Currently search over only name is available**
 
-
 #### Response
 ```
 {
    "products": 
    {
-	  "id": "1",
+	  "id": "20",
 	  "name": "latest cake",
 	  "description": "new cake",
 	  "status": "active",
