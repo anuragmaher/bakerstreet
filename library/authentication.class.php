@@ -4,6 +4,7 @@
 * This class can be used for authentiction. 
 * To use this class first set setUserAndPassword and then check for user and password validation.
 **/
+namespace Auth;
 
 class Authentication
 {
@@ -32,7 +33,7 @@ class Authentication
     {
     	if(!array_key_exists("password", $source) || !array_key_exists("username", $source))
         {
-        	throw new InsufficientDataException("username password fields are required");
+        	throw new \InsufficientDataException("username password fields are required");
         }
         $this->setUserAndPassword($source['username'], $source['password']);
     }
@@ -50,7 +51,7 @@ class Authentication
         $result = $authtoken->checkToken($token);
         if(!count($result))
         {
-            throw new UnAuthorizedActionException("Invalid Token");
+            throw new \UnAuthorizedActionException("Invalid Token");
         }
         return true;
     }
@@ -63,7 +64,7 @@ class Authentication
     */
     function createNewToken ($userid)
     {
-    	$authtoken = new AuthToken();
+    	$authtoken = new \AuthToken();
     	return $authtoken->createToken($userid);
     }
 
@@ -75,11 +76,11 @@ class Authentication
     */
     function checkIfUserExists ()
     {
-    	$user = new User;
+    	$user = new \User;
     	$u = $user->getUserByName($this->username);
     	if(count($u) == 0)
         {
-        	throw new UserNotFoundException("user not found", 1);
+        	throw new \UserNotFoundException("user not found", 1);
         }
     }
 
@@ -91,7 +92,7 @@ class Authentication
     */
     function checkPasswordMatch ()
     {
-    	$user = new User;
+    	$user = new \User;
     	$result = $user->checkPassword($this->username, $this->password);
     
         if(count($result) > 0)
@@ -101,7 +102,7 @@ class Authentication
         }
         else
         {
-        	throw new PasswordNotMatchException("password do not match", 1);	
+        	throw new \PasswordNotMatchException("password do not match", 1);	
         }
     }
 
@@ -115,5 +116,4 @@ class Authentication
         $userid = $this->checkPasswordMatch();
         return $userid;
     }
-
 }

@@ -21,7 +21,7 @@ class AuthTokenController
     */
     function create()
     {
-        $authClass = new Authentication;
+        $authClass = new Auth\Authentication;
         try{
             $source = $_POST;
             $authClass->setPostData($source);

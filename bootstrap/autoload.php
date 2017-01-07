@@ -6,6 +6,10 @@ define('ROOT', dirname(dirname(__FILE__)));
  
 function __autoload($className)
 {
+
+    $parts = explode('\\', $className);
+    $className = end($parts);
+
     if (file_exists(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php')) 
     {
         require_once(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php');

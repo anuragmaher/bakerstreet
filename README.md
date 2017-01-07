@@ -39,14 +39,11 @@ Return value will be like
 
 ```
 {
-    "error": null,
     "content": {
-        "expires": 1408109484,       // yet to be implemented
         "token": "58712b8969a5a"
     }
 }
 ```
-**TODO: expires is not implemented yet**
 
 ###Example
 ```
@@ -264,7 +261,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
 	  -H "authtoken: 58712b8969a5a"
 ```
 
-**NOTE** : name and description are required fields
+**NOTE : name and description are required fields**
 
 #### Response
 ```
@@ -338,7 +335,7 @@ $ heroku addons:create cleardb:ignite
 ```
 $ heroku git:remote -a herokuappname
 ```
-**pushing code to heroku directory**
+**Pushing code to heroku directory**
 
 ```
 $ git push heroku master
