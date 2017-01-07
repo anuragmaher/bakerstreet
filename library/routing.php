@@ -84,7 +84,7 @@ try{
 	{
 		if($jsonResponse)
 		{
-			//header('Content-Type: application/json');
+			header('Content-Type: application/json');
 		}
 	    echo json_encode(call_user_func_array(array($dispatch,$action), array($queryString)));
 	    return;

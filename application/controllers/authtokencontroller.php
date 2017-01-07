@@ -24,8 +24,6 @@ class AuthTokenController
         $authClass = new Authentication;
         try{
             $source = $_POST;
-            echo print_r($_POST, true);
-            exit();
             $authClass->setPostData($source);
             $authClass->checkIfUserExists();
             $userid = $authClass->checkUserAuth();
