@@ -330,6 +330,8 @@ $ heroku create herokuappname
 $ heroku addons:create cleardb:ignite
 ```
 
+**Make sure CLEARDB_DATABASE_URL ENV is set to the mysql URI** 
+
 **Adding heroku as remote for pushing and deploying**
 
 ```

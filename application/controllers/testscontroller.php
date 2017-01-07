@@ -65,6 +65,7 @@ class TestsController {
         $result = MyCurl::callAPI("GET", BASEURL . "/products");
         if(!strpos($result, "401 Unauthorized"))
         {
+            echo print_r($result, true);
             throw new Exception("  Response code 401 not found ");
         }
         echo "Test case passed";
