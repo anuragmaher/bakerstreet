@@ -85,8 +85,10 @@ class TestsController {
 
     function getProductsWithAuthenticationHeader ()
     {
-        echo "<br/> <b>Test 6 </b>: Get products without authtication GET /products and token</br>";
+        echo "<br/> <b>Test 6 </b>: Get products without authtication GET /products and token: $this->token </br>";
         $result = MyCurl::callAPI("GET", BASEURL . "/products", "", $this->token);
+        echo print_r($result, true);
+        exit();
         if(!strpos($result, "1.1 200 OK"))
         {
             throw new Exception("  Response code 200 not found ");
