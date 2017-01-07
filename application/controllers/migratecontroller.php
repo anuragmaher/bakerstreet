@@ -18,7 +18,7 @@ class MigrateController {
               "`created_at` datetime DEFAULT NULL," . 
               "`updated_at` datetime DEFAULT NULL," . 
               "PRIMARY KEY (`id`)" .
-              ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1; ";
+              ") ENGINE=InnoDB DEFAULT CHARSET=latin1; ";
         return $query;
     }
 
@@ -34,7 +34,7 @@ class MigrateController {
               "UNIQUE KEY `token_UNIQUE` (`token`)," .
               "KEY `userid` (`userid`)," .
               "CONSTRAINT `authtokens_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `users` (`id`)" .
-            ") ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1";
+            ") ENGINE=InnoDB DEFAULT CHARSET=latin1";
     }
 
     public function productCreationQuery ()
@@ -47,7 +47,7 @@ class MigrateController {
               "`created_at` datetime DEFAULT NULL,".
               "`updated_at` datetime DEFAULT NULL,".
               "PRIMARY KEY (`id`)".
-            ") ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1";
+            ") ENGINE=InnoDB DEFAULT CHARSET=latin1";
     }
 
     public function createAdminUser()
