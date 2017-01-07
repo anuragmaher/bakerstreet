@@ -1,4 +1,5 @@
 <?php
+/* AuthToken is DB class for database related operations */
 
 class AuthToken extends BaseModel 
 {
@@ -9,6 +10,12 @@ class AuthToken extends BaseModel
     	parent::__construct();
     }
 
+    /**
+    * Getting token for userid 
+    * @param  int  $userid
+    * @return array
+    * @author anurag
+    */
 	public function getTokenForUser ($userid)
 	{
 		$result = $this->query("select * from " . $this->_table . 
@@ -16,19 +23,31 @@ class AuthToken extends BaseModel
 		return $result;
 	}
 
+	/**
+    * Matching token from Database
+    * @param  string  $token
+    * @return array
+    * @author anurag
+    */
 	public function checkToken ($token)
 	{
-		$encryptedtoken = hash('sha256', $token);
+		$encryptedtoken = Encryption::encrypt($token);
 		$result = $this->query("select * from $this->_table where token = '$encryptedtoken'");
 		return $result;
 	}
 
+	/**
+    * Craeting token for userid 
+    * @param  int $userid
+    * @return array
+    * @author anurag
+    */
 	public function createToken ($userid)
 	{
 		$dbtoken = $this->getTokenForUser($userid);
 		$token = uniqid();
 		/* Encoding token */
-    	$encryptedtoken = hash('sha256', $token);
+    	$encryptedtoken = Encryption::encrypt($token);
 		if(!count($dbtoken))
 		{
 			// Have to create a token here 

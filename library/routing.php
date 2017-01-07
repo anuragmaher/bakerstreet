@@ -1,8 +1,10 @@
 <?php 
 
+// Request URI is the url without get params 
 $urlArray = explode("?", $_SERVER['REQUEST_URI']);
 $url = $urlArray[0];
 $urlArray = explode("/",$url);
+// This is for heroku deployment, we are getting first element as null
 if(!$urlArray[0])
 {
 	array_shift($urlArray);
@@ -14,6 +16,7 @@ if(count($urlArray))
 	$action = $urlArray[0];
 }
 else{
+	// Set action as null 
 	$action = "";
 }
 array_shift($urlArray);
@@ -47,7 +50,11 @@ if($controller == RESTAPI)
 	{
 		$action = "all";
 	}
-	if($param && $method === 'POST')
+	else if($method === "DELETE")
+	{
+		$action = "delete";
+	}
+	if($method === 'PUT')
 	{
 		$action = "edit";
 		$queryString = $param;
@@ -57,6 +64,12 @@ if($controller == RESTAPI)
 		$action = "get";
 		$queryString = $param;
 	}
+	if($method === 'DELETE')
+	{
+		$action = "delete";
+		$queryString = $param;
+	}
+
 }
 $controllerName = $controller;
 $controller = ucwords($controller);
@@ -64,14 +77,20 @@ $controller = ucwords($controller);
 $controller .= 'Controller';
 $dispatch = new $controller();
 
-if ((int)method_exists($controller, $action)) 
-{
-    echo json_encode(call_user_func_array(array($dispatch,$action), array($queryString)));
-    return;
-}
-else
-{    
-    /* Error Generation Code Here */
-    http_response_code(405);
-    return "405";
+try{
+	if ((int)method_exists($controller, $action)) 
+	{
+		//header('Content-Type: application/json');
+	    echo json_encode(call_user_func_array(array($dispatch,$action), array($queryString)));
+	    return;
+	}
+	else
+	{
+	    /* Error Generation Code Here */
+	    http_response_code(405);
+	    return "405";
+	}
+
+}catch(ResourceNotFoundException $e){
+	echo json_encode(array("status" => "not found" ));
 }

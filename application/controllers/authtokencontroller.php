@@ -12,11 +12,19 @@ class AuthTokenController
 
     }
 
+    /**
+    * Creating token for submitted username and passwords.
+    * @param  string  $username
+    * @param  string  $password
+    * @return none
+    * @author anurag
+    */
     function create()
     {
         $authClass = new Authentication;
         try{
-            $authClass->checkIfPostDataPresent();
+            $source = $_POST;
+            $authClass->setPostData($source);
             $authClass->checkIfUserExists();
             $userid = $authClass->checkUserAuth();
             $token = $authClass->createNewToken($userid);
@@ -45,7 +53,7 @@ class AuthTokenController
  
     function __destruct() 
     {
-        //$this->_template->render();
+
     }
          
 }

@@ -86,4 +86,10 @@ class SQLBase
         return $result;
     }
 
+    function delete ($query)
+    {
+        $result = $this->_conn->query($query);
+        return $result;
+    }
+
 }
