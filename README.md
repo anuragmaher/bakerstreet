@@ -351,7 +351,7 @@ $ heroku open migrate/db
 ## Executing Test cases 
 
 ```
-$ heroku open tests/auth
+$ heroku open tests/start
 ```
 
 ### Sample Test Cases Execution

@@ -57,9 +57,8 @@ class AuthToken extends \BaseModel
 		}
 		else
 		{
-			//echo $encryptedtoken;
 			$query = "update $this->_table set token = '$encryptedtoken', updated_at = now() where userid = $userid";
-			$this->insert($query);
+			$this->update($query);
 		}
 		return $token;
 	}

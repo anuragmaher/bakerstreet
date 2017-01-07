@@ -71,25 +71,40 @@ class SQLBase
         while ($row = $result->fetch_assoc()){
             $user_arr[] = $row;
         }
+        if($this->_conn->error)
+        {
+            throw new Exception($this->_conn->error);
+        }
         return $user_arr;
     }
 
     function insert($query)
     {
         $result = $this->_conn->query($query);
-        //echo print_r($this->_conn->error);
+        if($this->_conn->error)
+        {
+            throw new Exception($this->_conn->error);
+        }
         return $result;
     }
 
     function update($query)
     {
         $result = $this->_conn->query($query);
+        if($this->_conn->error)
+        {
+            throw new Exception($this->_conn->error);
+        }
         return $result;
     }
 
     function delete ($query)
     {
         $result = $this->_conn->query($query);
+        if($this->_conn->error)
+        {
+            throw new Exception($this->_conn->error);
+        }
         return $result;
     }
 

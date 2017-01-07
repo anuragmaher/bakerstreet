@@ -71,9 +71,21 @@ class TestsController {
         return "<br/>";
     }
 
-    function getProductsWithAuthenticationHeader ()
+    function getProductsWithWrongAuthenticationHeader ()
     {
         echo "<br/> <b>Test 5 </b>: Get products without authtication GET /products and token</br>";
+        $result = MyCurl::callAPI("GET", BASEURL . "/products", "", "thisisnotavalidtoken");
+        if(!strpos($result, "401 Unauthorized"))
+        {
+            throw new Exception("  401 Unauthorized not found ");
+        }
+        echo "Test case passed";
+        return "<br/>";
+    }
+
+    function getProductsWithAuthenticationHeader ()
+    {
+        echo "<br/> <b>Test 6 </b>: Get products without authtication GET /products and token</br>";
         $result = MyCurl::callAPI("GET", BASEURL . "/products", "", $this->token);
         if(!strpos($result, "1.1 200 OK"))
         {
@@ -83,7 +95,43 @@ class TestsController {
         return "<br/>";
     }
 
-    function auth ()
+    function createProduct()
+    {
+        echo "<br/> <b>Test 7 </b>: POST /products with token and name and description </br>";
+        $result = MyCurl::callAPI("POST", BASEURL . "/products", "name=anurag&description=test", $this->token);
+        echo print_r($result, true);
+        exit();
+    }
+
+    function listsProduct()
+    {
+        echo "<br/> <b>Test 8 </b>: GET /products with token </br>";
+        $result = MyCurl::callAPI("GET", BASEURL . "/products", "", $this->token);
+        echo print_r($result, true);
+    }
+
+    function getOneProduct()
+    {
+        echo "<br/> <b>Test 9 </b>: POST /products with token and name and description </br>";
+        $result = MyCurl::callAPI("GET", BASEURL . "/products/1", "", $this->token);
+        echo print_r($result, true);
+    }
+
+    function deleteProduct ()
+    {
+        echo "<br/> <b>Test 10 </b>: DELETE /products/1 with token </br>";
+        $result = MyCurl::callAPI("DELETE", BASEURL . "/products/1", "", $this->token);
+        echo print_r($result, true);
+    }
+
+    function updateProduct ()
+    {
+        echo "<br/> <b>Test 11 </b>: PUT /products with token and name and description </br>";
+        $result = MyCurl::callAPI("PUT", BASEURL . "/products/1", "name=newname&description=test", $this->token);
+        echo print_r($result, true);
+    }
+
+    function start ()
     {
         echo "<h2> Automated Testing </h2>" . "<br/>";
         $this->userNotFoundException();
@@ -93,7 +141,9 @@ class TestsController {
         echo " <h3>All tests for authtication passed Token: " . $this->token . " </h3>";
         echo " Now all the tests will use this token : " . $this->token . " for authentication </br> ";
         $this->getProductsWithoutAuthentication();
+        $this->getProductsWithWrongAuthenticationHeader();
         $this->getProductsWithAuthenticationHeader();
+        $this->createProduct();
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
     }

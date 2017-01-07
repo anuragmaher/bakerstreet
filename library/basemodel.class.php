@@ -7,7 +7,9 @@ class BaseModel extends SQLBase
     {
         $this->connect(MYSQL_URI);
         $this->_model = get_class($this);
-        $this->_table = strtolower($this->_model)."s";
+        $parts = explode('\\', $this->_model);
+        $className = end($parts);
+        $this->_table = strtolower($className)."s";
     }
  
     function __destruct () 

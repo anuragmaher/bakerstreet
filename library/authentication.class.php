@@ -49,7 +49,7 @@ class Authentication
     {
         $authtoken = new AuthToken();
         $result = $authtoken->checkToken($token);
-        if(!count($result))
+        if(!$result)
         {
             throw new \UnAuthorizedActionException("Invalid Token");
         }
