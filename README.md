@@ -255,7 +255,7 @@ PUT /products/1
 ```
 curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
 	  -X "PUT" \
-	  -d "name=newname&description=new+description"\
+	  -d "name=newname&description=new+description&status=deleted"\
 	  -H "authtoken: 58712b8969a5a"
 ```
 
@@ -289,7 +289,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products?name=latest" \
 	  -H "authtoken: 58712b8969a5a"
 ```
 
-**Note: Currently search over only name is available**
+**Note: Currently search is available for name only**
 
 #### Response
 ```
