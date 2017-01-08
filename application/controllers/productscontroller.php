@@ -54,7 +54,7 @@ class ProductsController {
         $this->setInputFields($source);
         $product = new Product;
         $status = $product->edit($productid, $this->name, $this->description, $this->status);
-        return array("product" => $this->get($productid));
+        return $this->get($productid);
     }
 
     /**

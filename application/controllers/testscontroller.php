@@ -133,13 +133,23 @@ class TestsController {
     function updateProduct ($productid)
     {
         echo "<br/><br/> <b>Test 10 </b>: PUT /products/$productid with token and name and description </br>";
-        $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token);
+        $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token, false);
         $result = json_decode($result);
+        if(!$result->product)
+        {
+            throw new Exception(" product is not returned ");
+        }
+        $product = $result->product[0]; 
+        if(!$product->name == "newname")
+        {
+            throw new Exception(" product name change not successfull ");
+        }
+        echo " Test case passed ";
     }
 
     function deleteProduct ($productid)
     {
-        echo "<br/> <b>Test 11 </b>: DELETE /products/$productid with token </br>";
+        echo "<br/><br/> <b>Test 11 </b>: DELETE /products/$productid with token </br>";
         $result = MyCurl::callAPI("DELETE", BASEURL . "/products/$productid", "", $this->token, false);
         $result = json_decode($result);
         if(!$result->status == "done")
@@ -158,18 +168,18 @@ class TestsController {
         $this->wrongPasswordException();
         $this->token = $this->shouldwork();
         
-        echo " <h3>All tests for authtication passed Token: " . $this->token . " </h3>";
+        echo " <h3>All tests for authtication passed New Token: " . $this->token . " </h3>";
         echo " Now all the tests will use this token : " . $this->token . " for authentication </br> ";
         $this->getProductsWithoutAuthentication();
         $this->getProductsWithWrongAuthenticationHeader();
         $this->getProductsWithAuthenticationHeader();
-        echo "<br/> <br/><b> Test Cases for Products: </b> <br/> <br/>";
+        echo "<br/> <br/> <br/> <b> Test Cases for Products: </b>";
         /*
         * Have to write these tests- just the basic tests written.
         */
         $productid = $this->createProduct();
         $this->getOneProduct($productid);
-        //$this->updateProduct($productid);
+        $this->updateProduct($productid);
         $this->deleteProduct($productid);
 
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";

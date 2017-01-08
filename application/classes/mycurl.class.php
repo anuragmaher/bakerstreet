@@ -13,7 +13,6 @@ class MyCurl{
                     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 break;
             case "PUT":
-                curl_setopt($curl, CURLOPT_PUT, 1);
                 curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
                 break;
@@ -35,9 +34,12 @@ class MyCurl{
         }
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT,10);
-        $result = curl_exec($curl);
+        $response = curl_exec($curl);
+        if (!$response) {
+            die("Connection Failure.n");
+        }
         curl_close($curl);
-        return $result;
+        return $response;
     }	
 
 }
