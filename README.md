@@ -147,6 +147,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products"\
 
 ###Response
 ```
+HTTP/1.1 200 OK
 {
    "product": 
    {
@@ -162,7 +163,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products"\
 
 ### Get a Product 
 ```
-GET /products/1
+GET /products/{productid}
 ```
 
 #### Example
@@ -171,6 +172,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products/1" \
 	  -H "authtoken: 58712b8969a5a"
 ```
 ###Response
+HTTP/1.1 200 OK
 ```
 {
    "product": 
@@ -198,6 +200,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products" \
 
 #### Response
 ```
+HTTP/1.1 200 OK
 {
    "products": 
    [
@@ -221,6 +224,36 @@ curl -i "https://bakerstreetwala.herokuapp.com/products" \
 }
 ```
 
+### Edit the product 
+
+```
+PUT /products/{productid}
+```
+
+```
+curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
+	  -X "PUT" \
+	  -d "name=newname&description=new+description&status=deleted"\
+	  -H "authtoken: 58712b8969a5a"
+```
+
+**NOTE : name and description are required fields**
+
+#### Response
+```
+HTTP/1.1 200 OK
+{
+   "product": 
+   {
+	  "id": "1",
+	  "name": "newname",
+	  "description": "new description",
+	  "status": "deleted",
+	  "created_time": "2016-06-05T17:38:06-0700",
+	  "updated_time": "2016-06-05T20:09:23-0700"
+   }
+}
+```
 
 ### Delete 
 
@@ -239,42 +272,12 @@ curl -i "https://bakerstreetwala.herokuapp.com/products/19" \
 
 #### Response
 ```
+HTTP/1.1 200 OK
 {
     "status":"done"
 }
 ```
 
-
-### Edit the product 
-
-```
-PUT /products/1
-```
-
-
-```
-curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
-	  -X "PUT" \
-	  -d "name=newname&description=new+description&status=deleted"\
-	  -H "authtoken: 58712b8969a5a"
-```
-
-**NOTE : name and description are required fields**
-
-#### Response
-```
-{
-   "product": 
-   {
-	  "id": "1",
-	  "name": "newname",
-	  "description": "new description",
-	  "status": "deleted",
-	  "created_time": "2016-06-05T17:38:06-0700",
-	  "updated_time": "2016-06-05T20:09:23-0700"
-   }
-}
-```
 
 ### Search 
 
@@ -293,6 +296,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products?name=latest" \
 
 #### Response
 ```
+HTTP/1.1 200 OK
 {
    "products": 
    {
