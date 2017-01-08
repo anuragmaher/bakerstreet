@@ -133,7 +133,7 @@ class TestsController {
     function updateProduct ($productid)
     {
         echo "<br/><br/> <b>Test 10 </b>: PUT /products/$productid with token and name and description </br>";
-        $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token, false);
+        $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token);
         $result = json_decode($result);
     }
 
@@ -169,7 +169,7 @@ class TestsController {
         */
         $productid = $this->createProduct();
         $this->getOneProduct($productid);
-        $this->updateProduct($productid);
+        //$this->updateProduct($productid);
         $this->deleteProduct($productid);
 
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
