@@ -14,9 +14,9 @@ function __autoload($className)
     {
         require_once(ROOT . DS . 'application' . DS . 'classes' . DS . strtolower($className) . '.class.php');
     }
-    else if (file_exists(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php')) 
+    else if (file_exists(ROOT . DS . 'application' . DS . 'exceptions' . DS . strtolower($className) . '.class.php')) 
     {
-        require_once(ROOT . DS . 'library' . DS . 'exceptions' . DS . strtolower($className) . '.class.php');
+        require_once(ROOT . DS . 'application' . DS . 'exceptions' . DS . strtolower($className) . '.class.php');
     }
     else if (file_exists(ROOT . DS . 'library' . DS . strtolower($className) . '.class.php')) 
     {
