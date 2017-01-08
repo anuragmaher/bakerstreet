@@ -355,24 +355,62 @@ $ heroku open tests/start
 ```
 
 ### Sample Test Cases Execution
-```
-Automated Testing
 
-Test 1- username: usernotpresent and password: junk 
-Test case passed
-Test 2- username: admin and password: junk 
-Test case passed
-Test 3- username: admin and password: admin 
-All tests for authtication passed Token: 58713765e1732
+####Automated Testing
 
-Now all the tests will use this token : 58713765e1732 for authentication 
+###Test Cases for Authentication: 
+***
 
-Test 4 : Get products without authtication GET /products 
-Test case passed
-Test 5 : Get products without authtication GET /products and token
-Test case passed
+**Test 1- username**: usernotpresent and password: junk 
 
-Authentication complete
+*Test case passed*
+
+**Test 2- username**: admin and password: junk 
+
+*Test case passed*
+
+**Test 3- username**: admin and password: admin 
+
+*Test case passed*
+
+**All tests for authtication passed New Token: 587280c834e05**
+
+Now all the tests will use this token : 587280c834e05 for authentication
+
+**Test 4** : Get products without authtication GET /products 
+
+*Test case passed*
+
+**Test 5** : Get products without authtication GET /products and token
+
+*Test case passed*
+
+**Test 6** : Get products without authtication GET /products and token: 587280c834e05 
+
+*Test case passed*
+
+
+###Test Cases for Products: 
+***
+
+**Test 7** : POST /products with token and name and description 
+Product created with id: 2 
+
+*Test case passed*
+
+**Test 8** : GET /products/2 with token and productid 
+Product created with id: 2
+
+*Test case passed*
+
+**Test 9** : PUT /products/2 with token and name and description 
+
+*Test case passed*
+
+
+**Test 10** : DELETE /products/2 with token 
+
+*Test case passed*
+
 
 "All Tests Passed"
-```
