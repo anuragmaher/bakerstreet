@@ -56,9 +56,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
 
 1) every time you create a new token, previous token will be invalidated. 
 
-2) token response will have a expiry time for the token, after which you will have to re generate the token.
-
-3) all requests should have token as authentication field. 
+2) all requests should have token as authentication field. 
 
 
 ## HTTP Methods
