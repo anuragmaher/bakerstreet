@@ -119,7 +119,7 @@ class TestsController {
 
     function getOneProduct($productid)
     {
-        echo "<br/> <br/> <b>Test 9 </b>: GET /products/$productid with token and productid </br>".BASEURL."/products/".$productid;
+        echo "<br/> <br/> <b>Test 8 </b>: GET /products/$productid with token and productid </br>".BASEURL."/products/".$productid;
         $result = MyCurl::callAPI("GET", BASEURL . "/products/$productid", "", $this->token, false);
         $result = json_decode($result);
         if(!$result->product)
@@ -132,7 +132,7 @@ class TestsController {
 
     function updateProduct ($productid)
     {
-        echo "<br/><br/> <b>Test 10 </b>: PUT /products/$productid with token and name and description </br>";
+        echo "<br/><br/> <b>Test 9 </b>: PUT /products/$productid with token and name and description </br>";
         $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token, false);
         $result = json_decode($result);
         if(!$result->product)
@@ -149,7 +149,7 @@ class TestsController {
 
     function deleteProduct ($productid)
     {
-        echo "<br/><br/> <b>Test 11 </b>: DELETE /products/$productid with token </br>";
+        echo "<br/><br/> <b>Test 10 </b>: DELETE /products/$productid with token </br>";
         $result = MyCurl::callAPI("DELETE", BASEURL . "/products/$productid", "", $this->token, false);
         $result = json_decode($result);
         if(!$result->status == "done")
