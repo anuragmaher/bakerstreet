@@ -16,40 +16,46 @@ $jsonResponse = false;
 
 if($controller == REST_CONTROLLER)
 {
-	$param = $action;
-	if(!array_key_exists('HTTP_AUTHTOKEN', $_SERVER))
-	{
-		http_response_code(401);
-		return "Unauthorized Action";
-	}
-	$authtoken = $_SERVER['HTTP_AUTHTOKEN'];
-	$method = $_SERVER['REQUEST_METHOD'];
 	try
 	{
+		// Since this is a REST request, second parameter will not be action. It will be parameter to the controller.
+		$param = $action;
+		if(!array_key_exists('HTTP_AUTHTOKEN', $_SERVER))
+		{
+			throw new UnAuthorizedActionException("Unauthorized Action");
+		}
+		$authtoken = $_SERVER['HTTP_AUTHTOKEN'];
+		$method = $_SERVER['REQUEST_METHOD'];
+
 		Auth\Authentication::validateToken($authtoken);
+
+		$action = $routes->getRestAction($method, $param);
+		$queryString = $routes->getRestQueryString($method, $param);
+		
+		if($queryString)
+		{
+			// This query string should be int values , if not integer throw exception
+			if(!intval($queryString))
+			{
+				throw new BadRequestException("Bad Request ");
+			}
+		}
+		$jsonResponse = true;
 	}
 	catch(UnAuthorizedActionException $e)
 	{
 		http_response_code(401);
 		return "Unauthorized Action";
 	}
-	$action = $routes->getRestAction($method);
-	
-	if($method == "GET" && $param)
+	catch(BadRequestException $e)
 	{
-		$action = "get";
-		$queryString = $param;
+		http_response_code(400);
+		return "Bad Request";
 	}
-	if($method == "PUT" && $param)
-	{
-		$action = "edit";
-		$queryString = $param;
-	}
-	if($method == "DELETE" && $param)
-	{
-		$queryString = $param;	
-	}
-	$jsonResponse = true;
+}
+if($controller == REST_CONTROLLER)
+{
+
 }
 $controller = ucwords($controller);
 

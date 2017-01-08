@@ -269,7 +269,7 @@ curl -i "https://bakerstreetwala.herokuapp.com/products/1"\
 	  "id": "1",
 	  "name": "newname",
 	  "description": "new description",
-	  "status": "active",
+	  "status": "deleted",
 	  "created_time": "2016-06-05T17:38:06-0700",
 	  "updated_time": "2016-06-05T20:09:23-0700"
    }

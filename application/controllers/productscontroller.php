@@ -72,7 +72,7 @@ class ProductsController {
         if($productid)
         {
             http_response_code(201);
-            return array("product" => $this->get($productid));
+            return $this->get($productid);
         }
     }
 

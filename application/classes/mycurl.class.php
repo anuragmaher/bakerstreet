@@ -2,7 +2,7 @@
 
 class MyCurl{
 
-	public static function callAPI($method, $url, $data = false, $token = false)
+	public static function callAPI($method, $url, $data = false, $token = false, $needHeader = true)
     {
         $curl = curl_init();
         switch ($method)
@@ -14,7 +14,11 @@ class MyCurl{
                 break;
             case "PUT":
                 curl_setopt($curl, CURLOPT_PUT, 1);
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
                 curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+                break;
+            case "DELETE":
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
                 break;
             default:
                 if ($data)
@@ -25,7 +29,10 @@ class MyCurl{
     		'authtoken: '. $token,
 		);
         curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_HEADER, true);
+        if($needHeader)
+        {
+            curl_setopt($curl, CURLOPT_HEADER, true);
+        }
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($curl, CURLOPT_TIMEOUT,10);
         $result = curl_exec($curl);

@@ -98,37 +98,55 @@ class TestsController {
 
     function createProduct()
     {
-        echo "<br/> <b>Test 7 </b>: POST /products with token and name and description </br>";
-        $result = MyCurl::callAPI("POST", BASEURL . "/products", "name=anurag&description=test", $this->token);
-        echo print_r($result, true);
+        echo "<br/> <br/> <b>Test 7 </b>: POST /products with token and name and description </br>";
+        $result = MyCurl::callAPI("POST", BASEURL . "/products", "name=anurag&description=test", $this->token, false);
+        $result = json_decode($result);
+        if(!$result->product)
+        {
+            throw new Exception(" product could not be created ");
+        }
+        $product = $result->product[0]; 
+        echo " Product created with id: " . $product->id;
+        echo " Test case passed ";
+        return $product->id;
     }
 
     function listsProduct()
     {
-        echo "<br/> <b>Test 8 </b>: GET /products with token </br>";
+        echo "<br/> <br/> <b>Test 8 </b>: GET /products with token </br>";
         $result = MyCurl::callAPI("GET", BASEURL . "/products", "", $this->token);
-        echo print_r($result, true);
     }
 
-    function getOneProduct()
+    function getOneProduct($productid)
     {
-        echo "<br/> <b>Test 9 </b>: POST /products with token and name and description </br>";
-        $result = MyCurl::callAPI("GET", BASEURL . "/products/2", "", $this->token);
-        echo print_r($result, true);
+        echo "<br/> <br/> <b>Test 9 </b>: GET /products/$productid with token and productid </br>".BASEURL."/products/".$productid;
+        $result = MyCurl::callAPI("GET", BASEURL . "/products/$productid", "", $this->token, false);
+        $result = json_decode($result);
+        if(!$result->product)
+        {
+            throw new Exception(" product is not returned ");
+        }
+        $product = $result->product[0]; 
+        echo " Product created with id: " . $product->id;
     }
 
-    function updateProduct ()
+    function updateProduct ($productid)
     {
-        echo "<br/> <b>Test 10 </b>: PUT /products with token and name and description </br>";
-        $result = MyCurl::callAPI("PUT", BASEURL . "/products/2", "name=newname&description=test", $this->token);
-        echo print_r($result, true);
+        echo "<br/><br/> <b>Test 10 </b>: PUT /products/$productid with token and name and description </br>";
+        $result = MyCurl::callAPI("PUT", BASEURL . "/products/$productid", "name=newname&description=12", $this->token, false);
+        $result = json_decode($result);
     }
 
-    function deleteProduct ()
+    function deleteProduct ($productid)
     {
-        echo "<br/> <b>Test 11 </b>: DELETE /products/1 with token </br>";
-        $result = MyCurl::callAPI("DELETE", BASEURL . "/products/2", "", $this->token);
-        echo print_r($result, true);
+        echo "<br/> <b>Test 11 </b>: DELETE /products/$productid with token </br>";
+        $result = MyCurl::callAPI("DELETE", BASEURL . "/products/$productid", "", $this->token, false);
+        $result = json_decode($result);
+        if(!$result->status == "done")
+        {
+            throw new Exception(" DELETE not succesfull ");
+        }
+        echo "Test Case passed";
     }
 
 
@@ -145,17 +163,15 @@ class TestsController {
         $this->getProductsWithoutAuthentication();
         $this->getProductsWithWrongAuthenticationHeader();
         $this->getProductsWithAuthenticationHeader();
-        echo "<br/> <b> More tests related to product update delete search and edit coming</b>";
+        echo "<br/> <br/><b> Test Cases for Products: </b> <br/> <br/>";
         /*
         * Have to write these tests- just the basic tests written.
-        /*
-        $this->createProduct();
-        $this->listsProduct();
-        $this->getOneProduct();
-        $this->updateProduct();
-        $this->deleteProduct();
         */
-        
+        $productid = $this->createProduct();
+        $this->getOneProduct($productid);
+        $this->updateProduct($productid);
+        $this->deleteProduct($productid);
+
         echo "<br/><br/><b> Authentication complete</b><br/><br/>";
         return "All Tests Passed";
     }

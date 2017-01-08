@@ -32,8 +32,30 @@ class Routes
 		return $controller;
 	}
 
-	public function getRestAction ($method)
+	public function getRestQueryString ($method, $param)
 	{
+		$queryString = "";
+		if($method == "GET" && $param)
+		{
+			$queryString = $param;
+		}
+		if($method == "PUT" && $param)
+		{
+			$queryString = $param;
+		}
+		if($method == "DELETE" && $param)
+		{
+			$queryString = $param;	
+		}
+		return $queryString;
+	}
+
+	public function getRestAction ($method, $param)
+	{
+		if($param === 0)
+		{
+			throw new BadRequestException("Bad Request ");
+		}
 		$action = "";
 		if ($method === 'POST') 
 		{
@@ -48,6 +70,14 @@ class Routes
 			$action = "delete";
 		}
 		if($method === 'PUT')
+		{
+			$action = "edit";
+		}
+		if($method == "GET" && $param)
+		{
+			$action = "get";
+		}
+		if($method == "PUT" && $param)
 		{
 			$action = "edit";
 		}
