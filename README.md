@@ -6,7 +6,7 @@ Baker Street is inspired from Sherlock Homes :)
 
 Baker Street API is built using REST principles and without any framework in mind. This API follows HTTP rules, enabling a wide range of HTTP clients can be used to interact with the API.
 
-URL is https://bakerstreetwala.heroku.com *I could not get bakerstreet on heroku*
+URL is https://bakerstreetwala.herokuapp.com *I could not get bakerstreet on heroku*
 
 
 ## Getting Started
