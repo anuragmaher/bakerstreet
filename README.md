@@ -6,7 +6,7 @@ Baker Street is inspired from Sherlock Homes :)
 
 Baker Street API is built using REST principles and without any framework in mind. This API follows HTTP rules, enabling a wide range of HTTP clients can be used to interact with the API.
 
-URL is https://bakerstreetwala.heroku.com *I could not get bakerstreet on heroku*
+URL is https://bakerstreetwala.herokuapp.com *I could not get bakerstreet on heroku*
 
 
 ## Getting Started
@@ -35,7 +35,13 @@ username      | admin
 password      | admin
 
 
-Return value will be like 
+###Example
+```
+curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
+	  -d "username=admin&password=admin"
+```
+
+###Response  
 
 ```
 {
@@ -43,12 +49,6 @@ Return value will be like
         "token": "58712b8969a5a"
     }
 }
-```
-
-###Example
-```
-curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
-	  -d "username=admin&password=admin"
 ```
 
 
@@ -418,3 +418,10 @@ Product created with id: 2
 
 
 "All Tests Passed"
+
+####Assumptions:
+
+1) currently token is not expiring, we should have a expiry time for the token. 
+
+2) URL does not have multiple slash together like ///
+
