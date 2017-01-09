@@ -418,3 +418,9 @@ Product created with id: 2
 
 
 "All Tests Passed"
+
+####Assumptions:
+
+1) currently token is not expiring, we should have a expiry time for the token. 
+2) URL does not have multiple slash together like ///
+
