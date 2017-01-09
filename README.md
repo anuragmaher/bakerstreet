@@ -35,7 +35,13 @@ username      | admin
 password      | admin
 
 
-Return value will be like 
+###Example
+```
+curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
+	  -d "username=admin&password=admin"
+```
+
+###Response  
 
 ```
 {
@@ -43,12 +49,6 @@ Return value will be like
         "token": "58712b8969a5a"
     }
 }
-```
-
-###Example
-```
-curl -i "https://bakerstreetwala.herokuapp.com/authtoken/create"\
-	  -d "username=admin&password=admin"
 ```
 
 
