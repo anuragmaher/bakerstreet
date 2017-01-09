@@ -367,11 +367,11 @@ $ heroku open tests/start
 
 **Test 1- username**: usernotpresent and password: junk 
 
-*Test case passed*
+*Test case passed UserNotFoundException is thrown*
 
 **Test 2- username**: admin and password: junk 
 
-*Test case passed*
+*Test case passed PasswordNotMatchException is thrown*
 
 **Test 3- username**: admin and password: admin 
 
