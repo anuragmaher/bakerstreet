@@ -383,13 +383,13 @@ Now all the tests will use this token : 587280c834e05 for authentication
 
 **Test 4** : Get products without authtication GET /products 
 
-*Test case passed*
+*Test case passed 401 Unauthorized recieved* 
 
-**Test 5** : Get products without authtication GET /products and token
+**Test 5** : Get products without authtication GET /products and wrong token
 
-*Test case passed*
+*Test case passed 401 Unauthorized recieved*
 
-**Test 6** : Get products without authtication GET /products and token: 587280c834e05 
+**Test 6** : Get products without authtication GET /products and correct token: 587280c834e05 
 
 *Test case passed*
 
@@ -398,21 +398,19 @@ Now all the tests will use this token : 587280c834e05 for authentication
 ***
 
 **Test 7** : POST /products with token and name and description 
-Product created with id: 2 
 
-*Test case passed*
+*Test case passed Product created with id: 2*
 
 **Test 8** : GET /products/2 with token and productid 
-Product created with id: 2
 
-*Test case passed*
+*Test case passed Product*
 
 **Test 9** : PUT /products/2 with token and name and description 
 
 *Test case passed*
 
 
-**Test 10** : DELETE /products/2 with token 
+**Test 10** : DELETE /products/{productid} with token 
 
 *Test case passed*
 
