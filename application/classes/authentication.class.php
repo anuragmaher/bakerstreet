@@ -6,6 +6,10 @@
 **/
 namespace Auth;
 
+class auth{}
+
+$aaaa = 1
+
 class Authentication
 {
     protected $username;
