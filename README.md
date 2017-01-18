@@ -1,5 +1,7 @@
 # REST API for Baker Street Store
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/17c3faf7d140425287b52e55e9fb2875)](https://www.codacy.com/app/anurag/bakerstreet?utm_source=github.com&utm_medium=referral&utm_content=anuragmaher/bakerstreet&utm_campaign=badger)
+
 Welcome to the REST API for Baker Street! You can use our API to create view and edit products on Baker Street Online Store.
 Baker Street is inspired from Sherlock Homes :) 
 
