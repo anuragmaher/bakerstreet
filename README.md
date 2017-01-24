@@ -1,5 +1,6 @@
 # REST API for Baker Street Store
 # test
+# test2
 
 Welcome to the REST API for Baker Street! You can use our API to create view and edit products on Baker Street Online Store.
 Baker Street is inspired from Sherlock Homes :) 
